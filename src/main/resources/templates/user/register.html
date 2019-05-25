@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<center>
+    <div style="width: 60%; margin-top: 5%">
+        <div class="shadow-lg">
+            <div class="alert alert-success" , role="alert">
+                <h1>Rejestracja na blogu MiniStack</h1>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <strong>Witaj na blogu</br>wypełnij poniższe pola w celu rejestracji.</strong>
+
+    <br/><br/>
+
+    <div th:if="${isRegistered != null && !isRegistered}" class="alert alert-danger" role="alert">
+        E-mail istnieje już w naszej bazie, odzyskaj hasło lub użyj innego e-maila.
+    </div>
+
+    <br/>
+
+    <form style="width: 70%" action="/user/register" method="post" th:object="${registerForm}">
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></div>
+
+            <div class="alert alert-success" role="alert">
+                <label for="nickname">Nick</label>
+            </div>
+            <input th:field="*{nickname}" id="nickname" type="text" class="form-control"
+                   placeholder="Wpisz swój nickname">
+        </div>
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+            <div class="alert alert-success" role="alert">
+                <label for="exampleInputEmail">Email</label>
+            </div>
+            <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail"
+                   aria-describedby="emailHelp" placeholder="Wpisz swój e-mail">
+            <small id="emailHelp" class="form-text text-muted">Twój adres jest niewidoczny dla innych</small>
+        </div>
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+
+            <div class="alert alert-success" role="alert">
+                <label for="exampleInputPassword1">Hasło</label>
+            </div>
+            <input th:field="*{password}" type="password" class="form-control" id="exampleInputPassword1"
+                   placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Zarejestruj</button>
+    </form>
+    </div>
+</center>
+</body>
+</html>
