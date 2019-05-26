@@ -11,6 +11,8 @@
 <center>
     <div style="width: 60%; margin-top: 50px">
         <br/>
+        <div th:if="${info !=null}" th:text="${info}" class="alert alert-success" role="alert"></div>
+
         <div class="card">
             <h5 class="card-header">Posty</h5>
             <div class="card-body">
