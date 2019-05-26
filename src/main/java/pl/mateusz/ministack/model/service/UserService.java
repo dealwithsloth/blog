@@ -17,11 +17,14 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    SessionService sessionService;
+
 
     @Transactional
-    public boolean registerUser(RegisterForm registerForm){
+    public boolean registerUser(RegisterForm registerForm) {
         //sprawdzanie po emialu czy jest zajety (nie bedzie dzialac bez transakcji)
-        if(userRepository.existsByEmail(registerForm.getEmail())){
+        if (userRepository.existsByEmail(registerForm.getEmail())) {
             return false;
         }
 
@@ -35,15 +38,21 @@ public class UserService {
 
     public boolean tryLogin(LoginForm loginForm) {
         Optional<UserEntity> userOptional = userRepository.findByEmail(loginForm.getEmail());
-        if(!userOptional.isPresent()){
+        if (!userOptional.isPresent()) {
             return false;
         }
-
-        return getBCrypt().matches(loginForm.getPassword(), userOptional.get().getPassword());
+        boolean passwordMatches = getBCrypt().matches(loginForm.getPassword(), userOptional.get().getPassword());
+        if (passwordMatches) {
+            sessionService.setLogin(true);
+            sessionService.setNickname(userOptional.get().getNickname());
+            sessionService.setUserId(userOptional.get().getId());
+        }
+        return passwordMatches;
+        //return getBCrypt().matches(loginForm.getPassword(), userOptional.get().getPassword());
     }
 
     @Bean
-    public BCryptPasswordEncoder getBCrypt(){
+    public BCryptPasswordEncoder getBCrypt() {
         return new BCryptPasswordEncoder();
     }
 

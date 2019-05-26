@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.mateusz.ministack.model.form.LoginForm;
 import pl.mateusz.ministack.model.form.RegisterForm;
+import pl.mateusz.ministack.model.service.SessionService;
 import pl.mateusz.ministack.model.service.UserService;
 
 
@@ -54,6 +55,7 @@ public class AuthController {
     public String login(@ModelAttribute LoginForm loginForm,
                         Model model){
         if(userService.tryLogin(loginForm)){
+
             return "redirect:/user/dashboard";
         }
         model.addAttribute("isLogin", false);
