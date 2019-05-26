@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mateusz.ministack.model.form.LoginForm;
 import pl.mateusz.ministack.model.form.RegisterForm;
 import pl.mateusz.ministack.model.service.SessionService;
@@ -20,6 +21,9 @@ public class AuthController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    SessionService sessionService;
 
     @GetMapping("/user/register")
     public String register(Model model) {
@@ -55,10 +59,17 @@ public class AuthController {
     public String login(@ModelAttribute LoginForm loginForm,
                         Model model){
         if(userService.tryLogin(loginForm)){
-
             return "redirect:/user/dashboard";
         }
         model.addAttribute("isLogin", false);
         return "user/login";
     }
-}
+
+    @GetMapping("/user/logout")
+    public String logout(RedirectAttributes redirectAttributes){
+        sessionService.setLogin(false);
+
+        redirectAttributes.addFlashAttribute("info", "Zostałeś wylogowany!");
+        return "redirect:/user/login";
+    }
+}       

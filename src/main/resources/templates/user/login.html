@@ -23,7 +23,8 @@
 
         <br/><br/>
 
-        <div th:if="${isLogin != null && !isLogin}" class="alert alert-danger" role="alert">
+        <div style="width: 60%" th:if="${info != null}" th:text="${info}" class="alert alert-success" role="alert"></div>
+        <div style="width: 60%" th:if="${isLogin != null && !isLogin}" class="alert alert-danger" role="alert">
             Dane są nieprawidłowe!
         </div>
 
@@ -34,7 +35,8 @@
                 <div class="alert alert-success" role="alert">
                     <label for="nickname">Email</label>
                 </div>
-                <input th:field="*{email}" id="nickname" type="text" class="form-control" placeholder="Wpisz swój e-mail">
+                <input th:field="*{email}" id="nickname" type="text" class="form-control"
+                       placeholder="Wpisz swój e-mail">
             </div>
             <div class="form-group">
                 <div class="alert alert-success" role="alert">

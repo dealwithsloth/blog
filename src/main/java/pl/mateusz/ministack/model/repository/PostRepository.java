@@ -7,7 +7,7 @@ import pl.mateusz.ministack.model.entity.UserEntity;
 
 @Repository
 public interface PostRepository extends CrudRepository<PostEntity, Integer> {
-
+Iterable<PostEntity> findTop10ByOrderByIdDesc();
 
 }
 

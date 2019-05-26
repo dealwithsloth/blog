@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Posty</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <th:block th:replace="user/inc/nav :: nav"></th:block>
@@ -12,32 +13,23 @@
     <div style="width: 60%; margin-top: 50px">
         <br/>
         <div th:if="${info !=null}" th:text="${info}" class="alert alert-success" role="alert"></div>
+        <th:block th:each="post : ${posts}">
+            <div class="card">
+                <h5 class="card-header" th:text="${post.getTitle()}"></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Autor: <b th:text="${post.getUser().getNickname()}"></b></h5>
+                    <p class="card-text" style="overflow:hidden" th:text="${post.getContent()}"></p>
+                    <a href="#" class="btn btn-primary">Skomentuj</a>
+                </div>
+                <div class="card-footer">
+                    <strong class="text-muted">Data dodania: <strong
+                            th:text="${post.getCreationTime()}"></strong></small>
+                </div>
+            </div>
 
-        <div class="card">
-            <h5 class="card-header">Posty</h5>
-            <div class="card-body">
-                <h5 class="card-title">Wpisy w budowie</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Idź do postu</a>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Ostatni komentarz: 5 minut temu</small>
-            </div>
-        </div>
+            <br/>
 
-        <br/>
-
-        <div class="card">
-            <h5 class="card-header">Posty</h5>
-            <div class="card-body">
-                <h5 class="card-title">Wpisy w budowie</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Idź do postu</a>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Ostatni komentarz: 5 minut temu</small>
-            </div>
-        </div>
+        </th:block>
     </div>
 </center>
 </body>
