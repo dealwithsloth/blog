@@ -10,18 +10,20 @@ import pl.mateusz.ministack.model.service.SessionService;
 
 @Controller
 public class DashboardController {
+
     @Autowired
     SessionService sessionService;
+
     @Autowired
     PostService postService;
 
     @GetMapping("/user/dashboard")
     public String dashboard(Model model) {
-        if (!sessionService.isLogin()) {
+        if(!sessionService.isLogin()){
             return "redirect:/user/login";
         }
-        model.addAttribute("posts", postService.getAllPosts());
 
+        model.addAttribute("posts", postService.getAllPosts());
         return "user/dashboard";
     }
 }

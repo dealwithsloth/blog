@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dodaj post</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <th:block th:replace="user/inc/nav :: nav"></th:block>
 <center>
-    <div style="width: 40%; margin-top: 5%">
-        <div style="width: 40%; margin-top: 5%">
-            <div class="shadow-lg">
-                <div class="alert alert-success" , role="alert">
-                    <h1>Nowy post</h1>
-                </div>
-            </div>
-        </div>
-        <br/>
-    <div style="width: 80%; margin-top: 5%">
-        <form style="width: 80%" action="/post/add" method="post" th:object="${postForm}">
+    <div style="width: 60%; margin-top: 5%">
+        <form style="width: 70%" action="/post/add" method="post" th:object="${postForm}">
             <div class="form-group">
-                <div style="width: 100%; margin-top: 5%">
                 <label for="title">Tytuł</label>
                 <input th:field="*{title}" id="title" type="text" class="form-control"  placeholder="Wpisz tytuł">
             </div>
             <div class="form-group">
-                <div style="width: 100%; margin-top: 5%">
                 <label for="content">Treść</label>
                 <textarea th:field="*{content}" class="form-control" id="content" placeholder="Treść pytania">
                     </textarea>
             </div>
-                <br/>
             <button type="submit" class="btn btn-primary">Dodaj post</button>
         </form>
     </div>

@@ -20,20 +20,17 @@ public class UserEntity {
     private int id;
     private String email;
     private String nickname;
-    //@Column(name = "password_user")
     private String password;
+
     @Column(name = "account_type")
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
+    public UserEntity() { }
 
-    public UserEntity() {
-    }
-
-    public UserEntity(RegisterForm registerForm) {
+    public UserEntity(RegisterForm registerForm){
         this.email = registerForm.getEmail();
         this.nickname = registerForm.getNickname();
         this.password = registerForm.getPassword();
     }
-
 }
