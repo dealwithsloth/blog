@@ -46,6 +46,7 @@ public class UserService {
             sessionService.setLogin(true);
             sessionService.setNickname(userOptional.get().getNickname());
             sessionService.setUserId(userOptional.get().getId());
+            sessionService.setAccountType(userOptional.get().getAccountType());
         }
         return passwordMatches;
         //return getBCrypt().matches(loginForm.getPassword(), userOptional.get().getPassword());

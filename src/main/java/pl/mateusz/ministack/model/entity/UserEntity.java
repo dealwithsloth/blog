@@ -3,15 +3,18 @@ package pl.mateusz.ministack.model.entity;
 import lombok.Data;
 import pl.mateusz.ministack.model.form.RegisterForm;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
 @Data
 public class UserEntity {
+    public enum AccountType {
+        ADMIN,
+        MODERATOR,
+        USER;
+    }
+
     @Id
     @GeneratedValue
     private int id;
@@ -19,6 +22,10 @@ public class UserEntity {
     private String nickname;
     //@Column(name = "password_user")
     private String password;
+    @Column(name = "account_type")
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
+
 
     public UserEntity() {
     }
